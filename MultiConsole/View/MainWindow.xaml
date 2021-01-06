@@ -1,0 +1,38 @@
+﻿<Window x:Class="MultiConsole.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MultiConsole" xmlns:view="clr-namespace:MultiConsole.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid Background="#F222">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding Consoles}" Background="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <view:SingleConsole />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Background="Transparent" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+        <Grid Grid.Row="1" Visibility="{Binding InputVisibility.Value}" Height="200">
+            <Grid.RowDefinitions >
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Text="{Binding Inputs, Mode=TwoWay}" AcceptsReturn="True" 
+                     Background="#1FFF" Foreground="#FFF" />
+            <Button Grid.Row="1" Content="Run" Command="{Binding RunCommand}"
+                    Background="#2FFF" Foreground="#FFF"/>
+        </Grid>
+    </Grid>
+</Window>
